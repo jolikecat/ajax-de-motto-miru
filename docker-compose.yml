@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    build: app/
+    volumes:
+      - ./app/htdocs:/usr/local/apache2/htdocs
+    ports:
+      - "8080:80"
+    restart: always
