@@ -10,7 +10,7 @@ $(function(){
 
   setMore.click(function(){
       $.ajax({
-          url: '../json/sample.json',
+          url: 'json/sample.json',
           dataType: 'json'
         })
           .done(function(data){
