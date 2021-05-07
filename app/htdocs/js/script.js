@@ -1,25 +1,26 @@
 $(function(){
-  var setArea = $('#loadarea'),
-  loadNum = 5, // 読み込む個数
+  let setArea = $('#loadarea'),
+  loadNum = 6, // 読み込む個数
   loadTxt = 'Now Loading...', // Loading中の表示テキスト
   btnTxt = 'もっと見る', // ボタンテキスト
   fadeSpeed = 500; // フェードスピード
 
-  setArea.after('<div id="btnMore">' + btnTxt + '</div>');
-  var setMore = setArea.next('#btnMore');
+  setArea.after('<button type="button" id="btnMore">' + btnTxt + '</button>');
+  let setMore = setArea.next('#btnMore');
 
   setMore.click(function(){
       $.ajax({
-          url: '../json/feature.json',
-          dataType: 'json',
-          success : function(data){
+          url: '../json/sample.json',
+          dataType: 'json'
+        })
+          .done(function(data){
               var dataLengh = data.length,
               loadItemLength = setArea.find('.loadItem').length,
               setAdj = (dataLengh)-(loadItemLength),
               setBeg = (dataLengh)-(setAdj);
-              if(!(dataLengh == loadItemLength)){
+              if(!(dataLengh === loadItemLength)){
                   setArea.append('<div id="nowLoading">' + loadTxt + '</div>');
-                  if(loadItemLength == 0){
+                  if(loadItemLength === 0){
                       if(dataLengh <= loadNum){
                           for (var i=0; i<dataLengh; i++) {
                               $('<div id="item' + data[i].itemNum + '" class="loadItem">' + data[i].itemSource + '</div>').appendTo(setArea).css({opacity:'0'}).animate({opacity:'1'},fadeSpeed);
@@ -43,20 +44,19 @@ $(function(){
                           }
                           setMore.remove();
                       }
-                  } else if(loadItemLength == dataLengh){
+                  } else if(loadItemLength === dataLengh){
                       return false;
                   }
               } else {
                   return false;
               }
-          }, //success
-          complete : function(){
+          }) //success
+          .always(function(){
               $('#nowLoading').each(function(){
                   $(this).remove();
               });
               return false;
-          } //complete
+          });//complete
+          return false;
       });
-      return false;
-  });
 });
