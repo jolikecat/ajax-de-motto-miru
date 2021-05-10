@@ -1,4 +1,11 @@
-docker-compose build→docker-compose upをしたらhttp://localhost:8080 で見れるはず。。
+```
+docker-compose build
+```
+↓
+```
+docker-compose up
+```
+をしたらhttp://localhost:8080 で見れるはず。。
 
 https://jolikecat.github.io/ajax-de-motto-miru/app/htdocs/ ここでも見れます。
 
